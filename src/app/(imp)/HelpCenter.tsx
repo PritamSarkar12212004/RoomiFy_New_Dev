@@ -1,10 +1,12 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useRef } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileSubHead from "@/src/components/header/ProfileSubHead";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import usecontactOption from "@/src/hook/usecontactOption";
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const HelpCenter = () => {
   const contactOption = usecontactOption();
@@ -15,7 +17,16 @@ const HelpCenter = () => {
       </View>
       <ScrollView className="flex-auto bg-white">
         <View className="flex-auto flex-col   gap-4 px-4">
-          <View className="w-full flex items-center justify-center"></View>
+          <View className="w-full flex items-center justify-center">
+            <View className="w-full  flex items-center justify-center">
+              <LootiANimation
+                path={Animation.HelpAnimation}
+                width={350}
+                height={300}
+                bgColor={"white"}
+              />
+            </View>
+          </View>
           <View className="w-full flex-col items-center justify-center gap-10 px-2">
             {contactOption.map((item, index) => {
               return (

@@ -15,6 +15,8 @@ import { useNavigation } from "expo-router";
 import { KeyboardAvoidingView } from "react-native";
 import { userContext } from "@/src/context/ContextApi";
 import RouteName from "@/src/constant/RouterName";
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const index = () => {
   const { uploadRoutname } = userContext();
@@ -42,7 +44,16 @@ const index = () => {
               <ProfileSubHead title="Owner Details" />
 
               {/* Lottie Animation */}
-              <View className="w-full flex items-center justify-center mt-5"></View>
+              <View className="w-full flex items-center justify-center mt-5">
+                <View className="w-full  flex items-center justify-center">
+                  <LootiANimation
+                    path={Animation.OwnerAnimation}
+                    width={350}
+                    height={300}
+                    bgColor={"white"}
+                  />
+                </View>
+              </View>
 
               {/* Form Fields */}
               <View className="mt-10">

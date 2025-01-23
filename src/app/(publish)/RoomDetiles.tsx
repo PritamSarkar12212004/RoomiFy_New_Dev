@@ -12,6 +12,8 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { optionRoomType, optionPersion } from "@/src/data/RoomDetilesOption";
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const RoomDetiles = () => {
   const navigate = useNavigation();
@@ -154,6 +156,14 @@ const RoomDetiles = () => {
       </View>
       <ScrollView className="flex-auto">
         <View className="w-full px-4 flex items-center justify-center ">
+        <View className="w-full  flex items-center justify-center">
+            <LootiANimation
+              path={Animation.RoomAnimation}
+              width={350}
+              height={300}
+              bgColor={"white"}
+            />
+          </View>
           <View className="w-full mt-10 flex-col gap-7">
             <View className="">
               <Text className="text-gray-700 text-lg font-semibold">

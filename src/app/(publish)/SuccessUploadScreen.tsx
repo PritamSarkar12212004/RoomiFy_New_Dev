@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Color from "@/src/constant/Color";
 import { useRouter } from "expo-router";
-
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const SuccessUploadScreen = () => {
   const [showView, setShowView] = useState(false);
@@ -24,7 +25,14 @@ const SuccessUploadScreen = () => {
       <View className="w-full h-full flex items-center justify-between py-10 ">
         <View />
         <View className="w-full flex items-center justify-center">
-      
+          <View className="w-full  flex items-center justify-center">
+            <LootiANimation
+              path={Animation.DoneAnimation}
+              width={350}
+              height={300}
+              bgColor={"white"}
+            />
+          </View>
         </View>
         <View>
           {showView && (

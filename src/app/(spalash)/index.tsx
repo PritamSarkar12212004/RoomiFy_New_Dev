@@ -5,6 +5,8 @@ import SkipButton from "@/src/components/button/SkipButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRouter } from "expo-router";
 import ImageConstant from "@/src/constant/ImageConstant";
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const index = () => {
   const navigate = useNavigation();
@@ -17,12 +19,15 @@ const index = () => {
       <View className=" w-full h-full bg-white flex items-center justify-between pb-5 px-5">
         <SkipButton />
         <View className="w-full flex-auto py-5 items-center justify-center">
-          <Image
-            source={ImageConstant.Room}
-            className="w-full h-96"
-            resizeMode="contain"
-          />
           <View className="w-full flex items-center justify-center gap-5 mt-10">
+            <View className="w-full  flex items-center justify-center">
+              <LootiANimation
+                path={Animation.HomeAnimation}
+                width={350}
+                height={300}
+                bgColor={"white"}
+              />
+            </View>
             <Text className="text-3xl font-bold text-center">
               Wellcome to <Text className="text-[#7c73e6]">R</Text>oomi
               <Text className="text-[#7c73e6]">F</Text>y

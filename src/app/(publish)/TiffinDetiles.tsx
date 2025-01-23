@@ -25,6 +25,8 @@ import {
 import FoodmenuAdder from "@/src/components/menuAdder/FoodmenuAdder";
 import NextButton from "@/src/components/button/NextButton";
 import { useNavigation } from "expo-router";
+import LootiANimation from "@/src/components/lottiAnimation/LootiANimation";
+import Animation from "@/src/constant/Animation";
 
 const TiffinDetiles = () => {
   const navigation = useNavigation();
@@ -80,7 +82,14 @@ const TiffinDetiles = () => {
       <ScrollView className="flex-auto">
         <View className="w-full px-4 flex items-center justify-center mb-28 ">
           <View className="w-full flex items-center justify-center">
-           
+            <View className="w-full  flex items-center justify-center">
+              <LootiANimation
+                path={Animation.FoodAnimation}
+                width={350}
+                height={300}
+                bgColor={"white"}
+              />
+            </View>
           </View>
           <View className="w-full mt-10 flex-col gap-7">
             <View className="">
