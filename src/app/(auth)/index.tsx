@@ -1,10 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import NextButton from "@/src/components/button/NextButton";
 import { useNavigation } from "expo-router";
 import Color from "@/src/constant/Color";
+import { Image } from "react-native";
+import Icon from "@/src/constant/Icon";
+import * as WebBrowser from "expo-web-browser";
+import useGoogleAuth from "@/src/hook/useGoogleAuth";
 
 const Index = () => {
   const navigation = useNavigation();
@@ -22,6 +26,19 @@ const Index = () => {
       navigation.navigate("VariFyOtp");
     }
   };
+  const initFunc = () => {
+    useEffect(() => {
+      // Warm up the android browser to improve UX
+      // https://docs.expo.dev/guides/authentication/#improving-user-experience
+      void WebBrowser.warmUpAsync();
+      return () => {
+        void WebBrowser.coolDownAsync();
+      };
+    }, []);
+  };
+  WebBrowser.maybeCompleteAuthSession();
+  initFunc();
+  const { onPress } = useGoogleAuth();
 
   return (
     <SafeAreaView style={{ backgroundColor: Color.bg }}>
@@ -60,6 +77,18 @@ const Index = () => {
                 Please enter a valid 10-digit phone number.
               </Text>
             )}
+          </View>
+          <View className="w-full mt-14 flex items-center justify-center">
+            <TouchableOpacity
+              onPress={() => onPress()}
+              activeOpacity={0.8}
+              className="w-full gap-5 px-3 flex-row items-center justify-center   bg-zinc-50 rounded-full py-4 "
+            >
+              <Image source={Icon.Google} className="h-10 w-10 " />
+              <Text className="text-zinc-600 text-xl font-bold">
+                Continue with Google
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
         <NextButton action={action} />

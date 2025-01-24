@@ -1,17 +1,17 @@
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "@clerk/clerk-expo";
 
 const Index = () => {
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
   const actions = async () => {
-    const auth = await AsyncStorage.getItem("auth");
-    if (auth) {
+    if (isSignedIn) {
       router.replace("/(main)");
     } else {
-      router.replace("/(main)");
+      router.replace("/(auth)");
     }
   };
 

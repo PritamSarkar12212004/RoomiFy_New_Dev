@@ -6,6 +6,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import SaveChangeButton from "@/src/components/button/SaveChangeButton";
 
 const ProfileEdit = () => {
+  
   return (
     <SafeAreaView className="w-full h-full gap-10 bg-white">
       <View className="w-full bg-white px-4 py-2">

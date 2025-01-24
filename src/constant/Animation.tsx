@@ -10,6 +10,7 @@ const Animation = {
   UploadAnimation: require("@/src/image/Animation/upload.json"),
   HomeAnimation: require("@/src/image/Animation/homeAnimation.json"),
   TiffinAnimation: require("@/src/image/Animation/tiffinAnimation.json"),
+  Cart: require("@/src/image/Animation/cart.json"),
 };
 
 export default Animation;
