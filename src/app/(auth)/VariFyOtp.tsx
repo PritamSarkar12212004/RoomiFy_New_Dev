@@ -5,15 +5,21 @@ import HeadGoback from "@/src/components/button/HeadGoback";
 import { OtpInput } from "react-native-otp-entry";
 import NextButton from "@/src/components/button/NextButton";
 import { useNavigation } from "expo-router";
+import { userContext } from "@/src/context/ContextApi";
 
 const VariFyOtp = () => {
+  const { otp } = userContext();
   const navigate = useNavigation();
-  const [otp, setOtp] = useState("");
+  const [otpInput, setOptInput] = useState("");
   const [error, setError] = useState("");
 
   const action = () => {
-    if (optValidation(otp)) {
-      navigate.navigate("DoneScreen");
+    if (optValidation(otpInput)) {
+      if (otpInput == otp) {
+        navigate.navigate("DoneScreen");
+      } else {
+        setError("Invalid OTP");
+      }
     }
   };
 
@@ -42,7 +48,7 @@ const VariFyOtp = () => {
               autoFocus={false}
               hideStick={true}
               onTextChange={(num) => {
-                setOtp(num);
+                setOptInput(num);
                 optValidation(num);
               }}
               placeholder="****"

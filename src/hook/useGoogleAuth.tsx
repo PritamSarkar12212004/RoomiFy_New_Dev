@@ -7,7 +7,7 @@ const useGoogleAuth = () => {
   const onPress = React.useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startOAuthFlow({
-        redirectUrl: Linking.createURL("/DoneScreen", { scheme: "myapp" }),
+        redirectUrl: Linking.createURL("/Process", { scheme: "myapp" }),
       });
       // If sign in was successful, set the active session
       if (createdSessionId) {

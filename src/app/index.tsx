@@ -1,14 +1,17 @@
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { useRouter } from "expo-router";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/clerk-expo";
+import Syntax from "../constant/Syntax";
+import storage from "../utils/mmkv/storage";
 
 const Index = () => {
   const { isSignedIn } = useAuth();
-  const router = useRouter();
 
+  const router = useRouter();
   const actions = async () => {
-    if (isSignedIn) {
+    const localAuth = storage.getString(Syntax.AUTHKEY);
+    if (isSignedIn || localAuth) {
       router.replace("/(main)");
     } else {
       router.replace("/(auth)");

@@ -14,5 +14,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "src/components/alert/ErrorAlert.tss", "src/utils/mmkv/mmkv.tss"  ]
 }

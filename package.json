@@ -23,6 +23,7 @@
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "axios": "^1.7.9",
     "expo": "~52.0.26",
     "expo-blur": "~14.0.2",
     "expo-camera": "~16.0.13",
@@ -49,6 +50,7 @@
     "react-native-gesture-handler": "~2.20.2",
     "react-native-image-viewing": "^0.2.2",
     "react-native-maps": "^1.20.1",
+    "react-native-mmkv": "^3.2.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^18.0.0",
     "react-native-otp-entry": "^1.8.2",
@@ -59,7 +61,8 @@
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "twilio": "^5.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

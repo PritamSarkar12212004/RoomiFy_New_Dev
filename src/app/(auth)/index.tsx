@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -9,21 +9,40 @@ import { Image } from "react-native";
 import Icon from "@/src/constant/Icon";
 import * as WebBrowser from "expo-web-browser";
 import useGoogleAuth from "@/src/hook/useGoogleAuth";
+import axiosInstance from "@/src/utils/axios/Axios";
+import { userContext } from "@/src/context/ContextApi";
 
 const Index = () => {
+  // context api
+  const { setOtp, setPhoneNumber } = userContext();
+
   const navigation = useNavigation();
-  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [phoneNumberInput, setPhoneNumberInput] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const PhoneValidation = (number: string) => {
     const regex = /^[0-9]{10}$/;
     setIsValid(regex.test(number));
-    setPhoneNumber(number);
+    setPhoneNumberInput(number);
   };
 
   const action = () => {
-    if (isValid && phoneNumber.length === 10) {
-      navigation.navigate("VariFyOtp");
+    if (isValid && phoneNumberInput.length === 10) {
+      setLoading(true);
+      axiosInstance
+        .post("/api/auth/login/otp")
+        .then((res) => {
+          setOtp(res.data.otp);
+          setPhoneNumber(phoneNumberInput);
+          navigation.navigate("VariFyOtp");
+          setLoading(false);
+        })
+        .catch((err) => {
+          Alert.alert("Sending OTP failed");
+          setLoading(false);
+        });
     }
   };
   const initFunc = () => {
@@ -64,7 +83,7 @@ const Index = () => {
             </View>
 
             <TextInput
-              value={phoneNumber}
+              value={phoneNumberInput}
               onChangeText={PhoneValidation}
               keyboardType="phone-pad"
               placeholder="Phone Number"
@@ -91,7 +110,7 @@ const Index = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <NextButton action={action} />
+        <NextButton action={action} loading={loading} />
       </View>
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useEffect } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,15 +12,17 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import ProfileOptionButton from "@/src/components/button/ProfileOptionButton";
 import LogoutButton from "@/src/components/button/LogoutButton";
 import ProfileHEader from "@/src/components/header/ProfileHEader";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import useSettingsOptions from "@/src/hook/useSettingsOptions";
 import useOtherOption from "@/src/hook/useOtherOption";
+import { useAuth } from "@clerk/clerk-expo";
+import storage from "@/src/utils/mmkv/storage";
+import Syntax from "@/src/constant/Syntax";
 
 const SettingsPage = () => {
+  const { signOut } = useAuth();
   const router = useRouter();
   const settingsOptions = useSettingsOptions();
   const otherOptions = useOtherOption();
-
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // Snap points for the bottom sheet
@@ -40,8 +42,10 @@ const SettingsPage = () => {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem("auth");
-    router.replace("/(spalash)");
+    signOut();
+    storage.delete(Syntax.AUTHKEY);
+    storage.delete(Syntax.USERDATA_BY_AUTH);
+    router.replace("/(auth)");
   };
 
   return (
