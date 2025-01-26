@@ -14,6 +14,9 @@ export const ContextProvider = ({ children }: any) => {
   // store Data
   const [storeProfileData, setStoreProfileData] = useState<any>(null);
 
+  // Content  Loader
+  const [profileLoader, setprofileoader] = useState(false);
+
   return (
     <Context.Provider
       value={{
@@ -27,6 +30,8 @@ export const ContextProvider = ({ children }: any) => {
         setPhoneNumber,
         storeProfileData,
         setStoreProfileData,
+        profileLoader,
+        setprofileoader,
       }}
     >
       {children}

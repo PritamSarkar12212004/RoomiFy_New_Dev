@@ -1,10 +1,18 @@
 import { View, ScrollView, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import RoomIndexHeader from "@/src/components/header/RoomIndexHeader";
 import RoomPopular from "@/src/components/card/RoomPopular";
 import Allroom from "@/src/components/card/Allroom";
+import useGetprofileDara from "@/src/hook/useGetprofileDara";
+import { userContext } from "@/src/context/ContextApi";
 
 const Index = () => {
+  const { profileLoader, setprofileoader } = userContext();
+
+  const { getProfileData } = useGetprofileDara();
+  useEffect(() => {
+    getProfileData();
+  }, [profileLoader]);
   return (
     <>
       <ScrollView

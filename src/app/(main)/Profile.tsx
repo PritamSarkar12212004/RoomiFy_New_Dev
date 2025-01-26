@@ -24,7 +24,6 @@ import useGetprofileDara from "@/src/hook/useGetprofileDara";
 const SettingsPage = () => {
   const { storeProfileData, setStoreProfileData, setPhoneNumber } =
     userContext();
-  const { getProfileData } = useGetprofileDara();
   const { signOut } = useAuth();
   const router = useRouter();
   const settingsOptions = useSettingsOptions();
@@ -35,9 +34,6 @@ const SettingsPage = () => {
 
   useEffect(() => {
     bottomSheetRef.current?.close();
-  }, []);
-  useEffect(() => {
-    getProfileData();
   }, []);
 
   const openBottomSheet = () => {

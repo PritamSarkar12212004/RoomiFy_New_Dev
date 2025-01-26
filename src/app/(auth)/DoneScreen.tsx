@@ -28,7 +28,10 @@ const DoneScreen = () => {
         console.log(res.data.data.userPhoneNumber);
         storage.set(
           Syntax.USERDATA_BY_AUTH,
-          JSON.stringify({ phoneNumber: res.data.data.userPhoneNumber })
+          JSON.stringify({
+            phoneNumber: res.data.data.userPhoneNumber,
+            id: res.data.data._id,
+          })
         );
         storage.set(Syntax.AUTHKEY, "true");
         router.replace("/(main)");
@@ -53,6 +56,7 @@ const DoneScreen = () => {
             email: res.data.data.userEmail,
             profileImag: res.data.data.profileImag,
             name: res.data.data.userName,
+            id: res.data.data._id,
           })
         );
         storage.set(Syntax.AUTHKEY, "true");

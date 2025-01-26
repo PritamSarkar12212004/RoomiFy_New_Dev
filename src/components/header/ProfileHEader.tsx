@@ -20,7 +20,7 @@ const ProfileHEader = () => {
         </TouchableOpacity>
       </View>
       <View className="flex-auto flex-row gap-5  items-center">
-        <View className="h-28 w-28 opacity-75 rounded-full">
+        <View className="h-28 w-28 rounded-full">
           <Image
             source={{
               uri: storeProfileData.profileImag
