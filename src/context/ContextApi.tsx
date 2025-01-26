@@ -11,6 +11,9 @@ export const ContextProvider = ({ children }: any) => {
   const [otp, setOtp] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
 
+  // store Data
+  const [storeProfileData, setStoreProfileData] = useState<any>(null);
+
   return (
     <Context.Provider
       value={{
@@ -22,6 +25,8 @@ export const ContextProvider = ({ children }: any) => {
         otp,
         phoneNumber,
         setPhoneNumber,
+        storeProfileData,
+        setStoreProfileData,
       }}
     >
       {children}

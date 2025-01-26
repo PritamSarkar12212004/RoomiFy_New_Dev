@@ -8,31 +8,61 @@ import Syntax from "@/src/constant/Syntax";
 import { userContext } from "@/src/context/ContextApi";
 import storage from "@/src/utils/mmkv/storage";
 import { useUser } from "@clerk/clerk-expo";
+import axiosInstance from "@/src/utils/axios/Axios";
+import { Alert } from "react-native";
 
 const DoneScreen = () => {
-  const { otp, phoneNumber } = userContext();
+  const { otp, setOtp, phoneNumber, setPhoneNumber } = userContext();
   const { user } = useUser();
   const userData = user;
   const router = useRouter();
 
   // opt and phone data saver
-  const otpPhoneFunvc = () => {
-    storage.set(Syntax.USERDATA_BY_AUTH, JSON.stringify({ phoneNumber }));
-    storage.set(Syntax.AUTHKEY, "true");
-    router.replace("/(main)");
+  const otpPhoneFunvc = async () => {
+    // call to backend  for making the user data in the databsase
+    axiosInstance
+      .post("/api/login/phone", {
+        phoneNumber: parseInt(phoneNumber),
+      })
+      .then((res) => {
+        console.log(res.data.data.userPhoneNumber);
+        storage.set(
+          Syntax.USERDATA_BY_AUTH,
+          JSON.stringify({ phoneNumber: res.data.data.userPhoneNumber })
+        );
+        storage.set(Syntax.AUTHKEY, "true");
+        router.replace("/(main)");
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("Error", "Something went wrong");
+        router.replace("/(auth)");
+      });
   };
   const googleAuthFinc = () => {
-    storage.set(
-      Syntax.USERDATA_BY_AUTH,
-      JSON.stringify({
+    axiosInstance
+      .post("/api/login/google", {
         email: userData.emailAddresses[0].emailAddress,
         profileImag: userData.externalAccounts[0].imageUrl,
-        fristName: userData.externalAccounts[0].firstName,
-        lastName: userData.externalAccounts[0].lastName,
+        name: userData.fullName,
       })
-    );
-    storage.set(Syntax.AUTHKEY, "true");
-    router.replace("/(main)");
+      .then((res) => {
+        storage.set(
+          Syntax.USERDATA_BY_AUTH,
+          JSON.stringify({
+            email: res.data.data.userEmail,
+            profileImag: res.data.data.profileImag,
+            name: res.data.data.userName,
+          })
+        );
+        storage.set(Syntax.AUTHKEY, "true");
+        router.replace("/(main)");
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("Error", "Something went wrong");
+        router.replace("/(auth)");
+      });
   };
 
   const authAdder = async () => {
@@ -46,6 +76,10 @@ const DoneScreen = () => {
     setTimeout(() => {
       authAdder();
     }, 1500);
+    return () => {
+      setPhoneNumber(null);
+      setOtp(null);
+    };
   }, []);
 
   return (

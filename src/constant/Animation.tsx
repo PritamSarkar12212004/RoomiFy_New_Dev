@@ -12,6 +12,7 @@ const Animation = {
   TiffinAnimation: require("@/src/image/Animation/tiffinAnimation.json"),
   Cart: require("@/src/image/Animation/cart.json"),
   Process: require("@/src/image/Animation/process.json"),
+  ProfilImage: require("@/src/image/Animation/profileImage.json"),
 };
 
 export default Animation;

@@ -4,9 +4,11 @@ import ProfileSubHead from "@/src/components/header/ProfileSubHead";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import SaveChangeButton from "@/src/components/button/SaveChangeButton";
+import { userContext } from "@/src/context/ContextApi";
 
 const ProfileEdit = () => {
-  
+  const { storeProfileData } = userContext();
+  console.log(storeProfileData);
   return (
     <SafeAreaView className="w-full h-full gap-10 bg-white">
       <View className="w-full bg-white px-4 py-2">
@@ -24,19 +26,23 @@ const ProfileEdit = () => {
               </TouchableOpacity>
               <Image
                 source={{
-                  uri: "https://i.pinimg.com/736x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg",
+                  uri: storeProfileData.profileImag
+                    ? storeProfileData.profileImag
+                    : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
                 }}
                 className="h-48 w-48 rounded-full"
                 resizeMode="cover"
               />
             </View>
           </View>
-          <View className="w-full flex-col gap-10">
+          <View className="w-full flex-col gap-5">
             <View className="w-full flex-col gap-2">
               <Text className="text-xl font-bold text-zinc-600">Name</Text>
               <TextInput
-                placeholder="Pritam Sarkar"
-                className="text-lg border-[1px] border-zinc-100 px-2 rounded-2xl"
+                placeholder={
+                  storeProfileData.name ? storeProfileData.name : "User"
+                }
+                className="text-lg border-[1px] border-zinc-100 px-5 h-14 font-semibold  tracking-widest   leading-loose   rounded-2xl"
               />
             </View>
             <View className="w-full flex-col gap-2">
@@ -44,8 +50,25 @@ const ProfileEdit = () => {
                 Phone Number
               </Text>
               <TextInput
-                placeholder="7797419792"
-                className="text-lg border-[1px] border-zinc-100 px-2 rounded-2xl"
+                keyboardType="number-pad"
+                placeholder={
+                  storeProfileData.phoneNumber
+                    ? storeProfileData.phoneNumber.toString()
+                    : "xxx-xx-xxx-xx"
+                }
+                className="text-lg border-[1px] border-zinc-100 px-5 h-14 font-semibold  tracking-widest   leading-loose   rounded-2xl"
+              />
+            </View>
+            <View className="w-full flex-col gap-2">
+              <Text className="text-xl font-bold text-zinc-600">Email</Text>
+              <TextInput
+                keyboardType="number-pad"
+                placeholder={
+                  storeProfileData.email
+                    ? storeProfileData.email
+                    : "xyz@gmail.com"
+                }
+                className="text-lg border-[1px] border-zinc-100 px-5 h-14 font-semibold  tracking-widest   leading-loose   rounded-2xl"
               />
             </View>
           </View>

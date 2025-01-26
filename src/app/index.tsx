@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { useRouter } from "expo-router";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useAuth, useOAuth } from "@clerk/clerk-expo";
 import Syntax from "../constant/Syntax";
 import storage from "../utils/mmkv/storage";
 

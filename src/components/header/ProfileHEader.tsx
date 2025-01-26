@@ -2,12 +2,15 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "expo-router";
+import { userContext } from "@/src/context/ContextApi";
 
 const ProfileHEader = () => {
+  const { storeProfileData } = userContext();
   const navigate = useNavigation();
   const action = () => {
     navigate.goBack();
   };
+
   return (
     <View className="w-full h-full flex justify-between ">
       <View className="w-full  flex-row justify-between items-center">
@@ -20,17 +23,27 @@ const ProfileHEader = () => {
         <View className="h-28 w-28 opacity-75 rounded-full">
           <Image
             source={{
-              uri: "https://i.pinimg.com/736x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg",
+              uri: storeProfileData.profileImag
+                ? storeProfileData.profileImag
+                : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             }}
-            className="w-full h-full rounded-full"
+            className="h-full w-full rounded-full"
+            resizeMode="cover"
           />
         </View>
-        <View className="">
+        <View className="flex ">
           <Text className="text-2xl font-extrabold text-[#393e46]">
-            Pritam Sarkar
+            {storeProfileData.name ? storeProfileData.name : "User"}
           </Text>
-          <Text className=" text-lg font-semibold text-[#565b64]">
-            7796419792
+          <Text className="  text-wrap  text-[#565b64]">
+            {storeProfileData.phoneNumber
+              ? storeProfileData.phoneNumber
+              : "No Phone Number Provided"}
+          </Text>
+          <Text className="   text-wrap  text-[#565b64]">
+            {storeProfileData.email
+              ? storeProfileData.email
+              : "No Email Provided"}
           </Text>
         </View>
       </View>

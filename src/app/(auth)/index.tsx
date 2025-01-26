@@ -32,7 +32,7 @@ const Index = () => {
     if (isValid && phoneNumberInput.length === 10) {
       setLoading(true);
       axiosInstance
-        .post("/api/auth/login/otp")
+        .post("/api/otp")
         .then((res) => {
           setOtp(res.data.otp);
           setPhoneNumber(phoneNumberInput);
